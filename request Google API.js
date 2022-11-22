@@ -1,0 +1,25 @@
+
+##Criando request Google API
+
+ * Lists all labels in the user's mailbox
+ * @see https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list
+ */
+function listLabels() {
+  try {
+    // Gmail.Users.Labels.list() API returns the list of all Labels in user's mailbox
+    const response = Gmail.Users.Labels.list('me');
+    if (!response || response.labels.length === 0) {
+      // TODO (developer) - No labels are returned from the response
+      Logger.log('No labels found.');
+      return;
+    }
+    // Print the Labels that are available.
+    Logger.log('Labels:');
+    for (const label of response.labels ) {
+      Logger.log('- %s', label.name);
+    }
+  } catch (err) {
+    // TODO (developer) - Handle exception on Labels.list() API
+    Logger.log('Labels.list() API failed with error %s', err.toString());
+  }
+}
